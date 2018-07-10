@@ -2,7 +2,15 @@
 
 An ESP8266 NodeMCU-based remotely-controlled infrared remote control (yes, I know) for Sony cameras. It's largely based on the solution described in [https://www.youtube.com/watch?v=D40ZpVjZ744](https://www.youtube.com/watch?v=D40ZpVjZ744).
 
-# Intstallation and Usage
+## Rationale
+
+If you think that Bimyou is just a bad case of overengineering, you are right! However, this solution does have some redeeming qualities:
+
+- Bimyou doesn't require any proprietary apps installed on your camera or mobile device
+- You can use any device with a browser to control the camera
+- It is possible to adapt Bimyou for use with camera models from other manufacturers
+
+# Installation and Usage
 
 1. Open the *bimyou.ino* sketch and specify the correct *ssid* and *password* values
 2. Upload the sketch to your ESP8266 NodeMCU board
