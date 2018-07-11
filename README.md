@@ -10,6 +10,20 @@ If you think that Bimyou is just a bad case of overengineering, you are right! H
 - You can use any device with a browser to control the camera
 - It is possible to adapt Bimyou for use with camera models from other manufacturers
 
+## Bill of Materials
+
+- ESP 8266 NodeMCU board
+- Breadboard
+- 1x 150Ohm resistor
+- IR LED (940nm)
+- Wires
+
+## Schematics
+
+Wire the parts as shown on the diagram below.
+
+<img src="bimyou-bb_bb.png" alt="" width="600"/>
+
 # Installation and Usage
 
 1. Open the *bimyou.ino* sketch and specify the correct *ssid* and *password* values
