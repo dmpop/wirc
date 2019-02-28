@@ -33,8 +33,9 @@ int inde[] = {0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 int rotate[] = {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 int enter[] = {1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 
-const char* ssid = "WiFi network name";
-const char* password = "password";
+IPAddress local_IP(192,168,4,22);
+IPAddress gateway(192,168,4,9);
+IPAddress subnet(255,255,255,0);
 
 
 // Create an instance of the server
@@ -129,14 +130,15 @@ void setup() {
   pinMode(LED, OUTPUT);        // Initialize the LED pin as an output
   Serial.begin(115200);
   delay(10);
-  // Connect to WiFi network
+Serial.begin(115200);
   Serial.println();
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-
-  WiFi.begin(ssid, password);
-
+  Serial.print("Setting soft-AP configuration ... ");
+  Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "Ready" : "Failed!");
+  Serial.print("Setting soft-AP ... ");
+  Serial.println(WiFi.softAP("ESPsoftAP_01") ? "Ready" : "Failed!");
+  Serial.print("Soft-AP IP address = ");
+  Serial.println(WiFi.softAPIP());
+  
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
