@@ -52,7 +52,7 @@ WiFiServer server(80);
 void burst()                    // 40KHz burst
 {
   digitalWrite(IR_LED, HIGH);   // Set the pin on
-  delayMicroseconds(10);        // Pause for 13 microseconds (fudged to 10uS Delay)
+  delayMicroseconds(10);        // Pause for 13 mS (fudged to 10uS Delay)
   digitalWrite(IR_LED, LOW);    // Set the pin off
   delayMicroseconds(8);         // Pause for 12 microseconds (fudged to 8uS Delay)
 }
@@ -132,7 +132,6 @@ void setup() {
   pinMode(LED, OUTPUT);        // Initialize the LED pin as an output
   Serial.begin(115200);
   delay(10);
-  Serial.begin(115200);
   Serial.println();
   Serial.print("Configuring access point");
   Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "Ready" : "Failed!");
@@ -220,11 +219,7 @@ void loop()
     sendbutton(inde);
   else if (req.indexOf("/gpio/rotate") != -1)
     sendbutton(rotate);
-  //  else {
-  //  Serial.println("Invalid request");
-  //client.stop();
-  //    return;
-  //  }
+
 
   client.flush();
 
@@ -258,9 +253,9 @@ void loop()
   s += "<input type=submit value=Print style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/print'>";
   s += "<input type=submit value=Down style=width:300px;height:150px;background:#009900 onclick=location.href='/gpio/down'>";
   // Send the response to the client
-  while (s.length() > 2000)
+  while (s.length() > 10000)
   {
-    String dummy = s.substring(0, 2000);
+    String dummy = s.substring(0, 10000);
     client.print(dummy);
     s.replace(dummy, " ");
   }
@@ -268,10 +263,10 @@ void loop()
   // Send the response to the client
   client.print(s);
   delay(1);
-  Serial.println("Client is disonnected");
+  Serial.println("Client is disconnected");
 
   // The client will actually be disconnected
-  // when the function returns and 'client' object is detroyed
+  // when the function returns and 'client' object is destroyed
 
 
 }
