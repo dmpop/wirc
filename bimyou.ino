@@ -225,33 +225,44 @@ void loop()
 
   // Prepare the response
   String s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n ";
+  s += "<head>";
+  s += "<title>Bimyou</title>";
   s += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">";
-  s += "<h1>Bimyou: Wireless IR Remote Control</h1>";
-  s += "<input type=submit value=\"Shutter Release\" style=width:300px;height:150px;background:#cc0000 onclick=location.href='/gpio/shutter'>";
-  s += "<input type=submit value=\"2 sec timer\" style=width:300px;height:150px;background:#ff9900 onclick=location.href='/gpio/2sec'>";
-  s += "<input type=submit value=\"START/STOP\" style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/start'>";
+  s += "<style>";
+  s += "body { font: 15px/25px 'Roboto', sans-serif; }";
+  s += "h1 { letter-spacing: 3px; color: #68b5d1; }";
+  s += "#btn { width: 11em;  height: 2em; background: #3399ff; border-radius: 5px; color: #fff; font-family: 'Robotto', sans-serif; font-size: 25px; font-weight: 900; letter-spacing: 3px; border:none; margin: 10px 10px 10px 10px; }";
+  s += "#btn.orange { background: #ff9900; }";
+  s += "#btn.red { background: #cc0000; }";
+  s += "#btn.green { background: #009900; }";
+  s += "</style>";
+  s += "</head>";
+  s += "<h1>WIRELESS IR REMOTE CONTROL</h1>";
+  s += "<input id='btn' class='red' type=submit value=\"SHUTTER\" onclick=location.href='/gpio/shutter'>";
+  s += "<input id='btn' class='orange' type=submit value=\"2S TIMER\" onclick=location.href='/gpio/2sec'>";
+  s += "<input id='btn' type=submit value=\"START/STOP\" onclick=location.href='/gpio/start'>";
   s += "<br>";
-  s += "<input type=submit value=DISP style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/disp'>";
-  s += "<input type=submit value=Histogram style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/hist'>";
-  s += "<input type=submit value=+ style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/zin'>";
+  s += "<input id='btn' type=submit value=DISP onclick=location.href='/gpio/disp'>";
+  s += "<input id='btn' type=submit value=HISTOGRAM onclick=location.href='/gpio/hist'>";
+  s += "<input id='btn' type=submit value=\"ZOOM IN\" onclick=location.href='/gpio/zin'>";
+  s += "<input id='btn' type=submit value=\"ZOOM OUT\" onclick=location.href='/gpio/zout'>";
   s += "<br>";
-  s += "<input type=submit value=\"Image Index\" style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/index'>";
-  s += "<input type=submit value=Rotation style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/rotate'>";
+  s += "<input id='btn' type=submit value=\"IMAGE INDEX\" onclick=location.href='/gpio/index'>";
+  s += "<input id='btn' type=submit value=ROTATION onclick=location.href='/gpio/rotate'>";
   s += "<br>";
-  s += "<input type=submit value=Playback style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/playback'>";
-  s += "<input type=submit value=\"Slide Show\" style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/slide'>";
-  s += "<input type=submit value=- style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/zout'>";
+  s += "<input id='btn' type=submit value=PLAYBACK onclick=location.href='/gpio/playback'>";
+  s += "<input id='btn' type=submit value=\"SLIDESHOW\" onclick=location.href='/gpio/slide'>";
   s += "<br>";
-  s += "<input type=submit value=Menu style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/menu'>";
-  s += "<input type=submit value=Up style=width:300px;height:150px;background:#009900 onclick=location.href='/gpio/up'>";
-  s += "<input type=submit value=Trash style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/trash'>";
+  s += "<input id='btn' type=submit value=MENU onclick=location.href='/gpio/menu'>";
+  s += "<input id='btn' type=submit value=TRASH onclick=location.href='/gpio/trash'>";
   s += "<br>";
-  s += "<input type=submit value=Left style=width:300px;height:150px;background:#009900 onclick=location.href='/gpio/left'>";
-  s += "<input type=submit value=Enter style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/enter'>";
-  s += "<input type=submit value=Right style=width:300px;height:150px;background:#009900 onclick=location.href='/gpio/right'>";
+  s += "<input id='btn' class='green' type=submit value=UP onclick=location.href='/gpio/up'>";
+  s += "<input id='btn' class='green' type=submit value=DOWN onclick=location.href='/gpio/down'>";
+  s += "<input id='btn' class='green' type=submit value=LEFT onclick=location.href='/gpio/left'>";
+  s += "<input id='btn' class='green' type=submit value=RIGHT onclick=location.href='/gpio/right'>";
+  s += "<input id='btn' type=submit value=ENTER onclick=location.href='/gpio/enter'>";
   s += "<br>";
-  s += "<input type=submit value=Print style=width:300px;height:150px;background:#3399ff onclick=location.href='/gpio/print'>";
-  s += "<input type=submit value=Down style=width:300px;height:150px;background:#009900 onclick=location.href='/gpio/down'>";
+  s += "<input id='btn' type=submit value=PRINT onclick=location.href='/gpio/print'>";
   // Send the response to the client
   while (s.length() > 10000)
   {
