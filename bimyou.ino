@@ -6,6 +6,9 @@
 // https://www.youtube.com/watch?v=D40ZpVjZ744
 
 #include <ESP8266WiFi.h>
+#include <WiFiManager.h>
+#include <DNSServer.h>
+#include <ESP8266WebServer.h>
 
 int IR_LED = 4;     // IR Output Signal to anode of the IR LED
 // Cathode of IR LED to ground through a 150 Ohm Resistor.
@@ -33,10 +36,6 @@ int inde[] = {0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 int rotate[] = {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 int enter[] = {1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 
-IPAddress local_IP(192, 168, 1, 1);
-IPAddress gateway(192, 168, 1, 9);
-IPAddress subnet(255, 255, 255, 0);
-const char* softAP_SSID = "Bimyou";
 
 // Create an instance of the server
 // specify the port to listen on as an argument
@@ -134,11 +133,20 @@ void setup() {
   delay(10);
   Serial.println();
   Serial.print("Configuring access point");
-  Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "Ready" : "Failed!");
-  Serial.print("Setting access point");
-  Serial.println(WiFi.softAP(softAP_SSID) ? "Ready" : "Failed!");
-  Serial.print("Access point IP address = ");
-  Serial.println(WiFi.softAPIP());
+
+
+  //WiFiManager
+  WiFiManager wifiManager;
+  //Reset saved settings
+  //wifiManager.resetSettings();
+
+  //Set custom ip for portal
+  wifiManager.setAPStaticIPConfig(IPAddress(10,0,1,1), IPAddress(10,0,1,1), IPAddress(255,255,255,0));
+
+  //Fetches SSID and password from EEPROM and try to connect
+  //If connection fails, start an access point with the specified name
+  //and goes into a blocking loop awaiting configuration
+  wifiManager.autoConnect("Bimyou");
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -241,27 +249,21 @@ void loop()
   s += "<input id='btn' class='red' type=submit value=\"SHUTTER\" onclick=location.href='/gpio/shutter'>";
   s += "<input id='btn' class='orange' type=submit value=\"2S TIMER\" onclick=location.href='/gpio/2sec'>";
   s += "<input id='btn' type=submit value=\"START/STOP\" onclick=location.href='/gpio/start'>";
-  s += "<br>";
   s += "<input id='btn' type=submit value=DISP onclick=location.href='/gpio/disp'>";
   s += "<input id='btn' type=submit value=HISTOGRAM onclick=location.href='/gpio/hist'>";
   s += "<input id='btn' type=submit value=\"ZOOM IN\" onclick=location.href='/gpio/zin'>";
   s += "<input id='btn' type=submit value=\"ZOOM OUT\" onclick=location.href='/gpio/zout'>";
-  s += "<br>";
   s += "<input id='btn' type=submit value=\"IMAGE INDEX\" onclick=location.href='/gpio/index'>";
   s += "<input id='btn' type=submit value=ROTATION onclick=location.href='/gpio/rotate'>";
-  s += "<br>";
   s += "<input id='btn' type=submit value=PLAYBACK onclick=location.href='/gpio/playback'>";
   s += "<input id='btn' type=submit value=\"SLIDESHOW\" onclick=location.href='/gpio/slide'>";
-  s += "<br>";
   s += "<input id='btn' type=submit value=MENU onclick=location.href='/gpio/menu'>";
   s += "<input id='btn' type=submit value=TRASH onclick=location.href='/gpio/trash'>";
-  s += "<br>";
   s += "<input id='btn' class='green' type=submit value=UP onclick=location.href='/gpio/up'>";
   s += "<input id='btn' class='green' type=submit value=DOWN onclick=location.href='/gpio/down'>";
   s += "<input id='btn' class='green' type=submit value=LEFT onclick=location.href='/gpio/left'>";
   s += "<input id='btn' class='green' type=submit value=RIGHT onclick=location.href='/gpio/right'>";
   s += "<input id='btn' type=submit value=ENTER onclick=location.href='/gpio/enter'>";
-  s += "<br>";
   s += "<input id='btn' type=submit value=PRINT onclick=location.href='/gpio/print'>";
   // Send the response to the client
   while (s.length() > 10000)
