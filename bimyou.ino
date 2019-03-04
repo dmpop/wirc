@@ -132,7 +132,6 @@ void setup() {
   Serial.begin(115200);
   delay(10);
   Serial.println();
-  Serial.print("Configuring access point");
 
 
   //WiFiManager
@@ -154,7 +153,7 @@ void setup() {
     digitalWrite(LED, HIGH);    // Turn the LED off
   }
   Serial.println("");
-  Serial.println("Access point is running");
+  Serial.println("Wi-Fi is up");
   digitalWrite(LED, LOW);    // Turn the LED on
 
   // Start the server
