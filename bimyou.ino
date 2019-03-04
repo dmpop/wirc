@@ -236,6 +236,7 @@ void loop()
   s += "<title>Bimyou</title>";
   s += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">";
   s += "<style>";
+  s += "#content { margin: 0px auto; text-align: center; }";
   s += "body { font: 15px/25px 'Roboto', sans-serif; }";
   s += "h1 { letter-spacing: 3px; color: #68b5d1; }";
   s += "#btn { width: 11em;  height: 2em; background: #3399ff; border-radius: 5px; color: #fff; font-family: 'Robotto', sans-serif; font-size: 25px; font-weight: 900; letter-spacing: 3px; border:none; margin: 10px 10px 10px 10px; }";
@@ -244,7 +245,8 @@ void loop()
   s += "#btn.green { background: #009900; }";
   s += "</style>";
   s += "</head>";
-  s += "<h1>WIRELESS IR REMOTE CONTROL</h1>";
+  s += "<div id='content'>";
+  s += "<h1>WI-FI IR REMOTE CONTROL</h1>";
   s += "<input id='btn' class='red' type=submit value=\"SHUTTER\" onclick=location.href='/gpio/shutter'>";
   s += "<input id='btn' class='orange' type=submit value=\"2S TIMER\" onclick=location.href='/gpio/2sec'>";
   s += "<input id='btn' type=submit value=\"START/STOP\" onclick=location.href='/gpio/start'>";
@@ -264,6 +266,9 @@ void loop()
   s += "<input id='btn' class='green' type=submit value=RIGHT onclick=location.href='/gpio/right'>";
   s += "<input id='btn' type=submit value=ENTER onclick=location.href='/gpio/enter'>";
   s += "<input id='btn' type=submit value=PRINT onclick=location.href='/gpio/print'>";
+  s += "</div>";
+  s += "</body>";
+  s += "</html>";
   // Send the response to the client
   while (s.length() > 10000)
   {
