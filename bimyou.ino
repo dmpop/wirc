@@ -11,9 +11,9 @@
 #include <ESP8266WebServer.h>
 
 int IR_LED = 4;     // IR Output Signal to anode of the IR LED
-// Cathode of IR LED to ground through a 150 Ohm Resistor.
-int BEGIN = 0 ;     // Indicates shutter start on the LED
-#define LED     D0  // LED in NodeMCU at pin GPIO16 (D0)
+                    // Cathode of IR LED to ground through a 150 Ohm Resistor.
+#define LED     D0  // Built-in LED at pin GPIO16 (D0)
+int i = 0;
 
 int shutter[] = {1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 int twosec[] = {1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
@@ -104,7 +104,8 @@ void Data_is_Zero()
 void sendbutton(int CodeBits[])
 {
 
-  digitalWrite(BEGIN, HIGH);      // Signal BEGIN LED ON
+
+  digitalWrite(LED, HIGH);           // Turn the LED off
 
   for (int i = 1; i <= 3; i++)    // Send the command 3 times as per Sony specs
   {
@@ -122,7 +123,7 @@ void sendbutton(int CodeBits[])
     }
     delay(11);                    // Delay to give approx. 45uS between command starts
   }
-  digitalWrite(BEGIN, LOW);       // BEGIN LED OFF
+  digitalWrite(LED, LOW);        // Turn the LED on
 }
 
 
@@ -140,11 +141,11 @@ void setup() {
   //wifiManager.resetSettings();
 
   //Set custom ip for portal
-  wifiManager.setAPStaticIPConfig(IPAddress(10,0,1,1), IPAddress(10,0,1,1), IPAddress(255,255,255,0));
+  wifiManager.setAPStaticIPConfig(IPAddress(10, 0, 1, 1), IPAddress(10, 0, 1, 1), IPAddress(255, 255, 255, 0));
 
   //Fetches SSID and password from EEPROM and try to connect
   //If connection fails, start an access point with the specified name
-  //and goes into a blocking loop awaiting configuration
+  //and wait for configuration
   wifiManager.autoConnect("Bimyou");
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -154,7 +155,14 @@ void setup() {
   }
   Serial.println("");
   Serial.println("Wi-Fi is up");
-  digitalWrite(LED, LOW);    // Turn the LED on
+  // Blink the LED 5 times to indicate success
+  while (i < 5) {
+    digitalWrite(LED, HIGH);
+    delay(500);
+    digitalWrite(LED, LOW);
+    delay(500);
+    i++;
+  }
 
   // Start the server
   server.begin();
@@ -162,9 +170,8 @@ void setup() {
 
   // Print the IP address
   Serial.println(WiFi.localIP());
-  // Setup IR_LED and BEGIN LED Pins as outputs
-  pinMode(IR_LED, OUTPUT);      // set the digital pin as output
-  pinMode(BEGIN, OUTPUT);      //  Set the digital pin as output
+  // Setup IR_LED pin as output
+  pinMode(IR_LED, OUTPUT);      // Set the digital pin as output
 }
 
 // Infinite Loop
