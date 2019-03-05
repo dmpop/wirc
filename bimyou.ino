@@ -10,10 +10,9 @@
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
 
-int IR_LED = 4;     // IR Output Signal to anode of the IR LED
+int IR_LED = 13;     // IR Output Signal to anode of the IR LED
                     // Cathode of IR LED to ground through a 150 Ohm Resistor.
-#define LED     D0  // Built-in LED at pin GPIO16 (D0)
-int i = 0;
+int i = 0;          // Set the counter to 0
 
 int shutter[] = {1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 int twosec[] = {1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
@@ -105,7 +104,7 @@ void sendbutton(int CodeBits[])
 {
 
 
-  digitalWrite(LED, HIGH);           // Turn the LED off
+  digitalWrite(BUILTIN_LED, HIGH);           // Turn the LED off
 
   for (int i = 1; i <= 3; i++)    // Send the command 3 times as per Sony specs
   {
@@ -123,13 +122,13 @@ void sendbutton(int CodeBits[])
     }
     delay(11);                    // Delay to give approx. 45uS between command starts
   }
-  digitalWrite(LED, LOW);        // Turn the LED on
+  digitalWrite(BUILTIN_LED, LOW);        // Turn the LED on
 }
 
 
 
 void setup() {
-  pinMode(LED, OUTPUT);        // Initialize the LED pin as an output
+  pinMode(BUILTIN_LED, OUTPUT);        // Initialize the LED pin as an output
   Serial.begin(115200);
   delay(10);
   Serial.println();
@@ -151,15 +150,15 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
-    digitalWrite(LED, HIGH);    // Turn the LED off
+    digitalWrite(BUILTIN_LED, HIGH);    // Turn the LED off
   }
   Serial.println("");
   Serial.println("Wi-Fi is up");
   // Blink the LED 5 times to indicate success
   while (i < 5) {
-    digitalWrite(LED, HIGH);
+    digitalWrite(BUILTIN_LED, HIGH);
     delay(500);
-    digitalWrite(LED, LOW);
+    digitalWrite(BUILTIN_LED, LOW);
     delay(500);
     i++;
   }
