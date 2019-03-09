@@ -145,7 +145,7 @@ void setup() {
   //Fetches SSID and password from EEPROM and try to connect
   //If connection fails, start an access point with the specified name
   //and wait for configuration
-  wifiManager.autoConnect("Bimyou");
+  wifiManager.autoConnect();
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
