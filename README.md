@@ -2,6 +2,8 @@
 
 An ESP8266 NodeMCU-based remotely-controlled infrared remote control (yes, I know) for Sony cameras. It's largely based on the solution described in [https://www.youtube.com/watch?v=D40ZpVjZ744](https://www.youtube.com/watch?v=D40ZpVjZ744).
 
+<img src="bimyou.jpg" alt="Bimyou" width="500"/>
+
 ## Rationale
 
 If you think that Bimyou is just a bad case of overengineering, you are right! However, this solution does have some redeeming qualities:
