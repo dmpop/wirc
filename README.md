@@ -1,16 +1,16 @@
-# Bimyou :cherry_blossom: 微妙
+# WIRC
 
-An ESP8266 NodeMCU-based remotely-controlled infrared remote control (yes, I know) for Sony cameras. It's largely based on the solution described in [https://www.youtube.com/watch?v=D40ZpVjZ744](https://www.youtube.com/watch?v=D40ZpVjZ744).
+An ESP8266 NodeMCU-based remotely-controlled infrared remote control for Sony cameras. It's largely based on the solution described in [https://www.youtube.com/watch?v=D40ZpVjZ744](https://www.youtube.com/watch?v=D40ZpVjZ744).
 
-<img src="bimyou.jpg" alt="Bimyou" width="500"/>
+<img src="wirc.jpg" alt="WIRC" width="500"/>
 
 ## Rationale
 
-If you think that Bimyou is just a bad case of overengineering, you are right! However, this solution does have some redeeming qualities:
+If you think that WIRC is just a bad case of overengineering, you are right! However, this solution does have some redeeming qualities:
 
-- Bimyou doesn't require any proprietary apps installed on your camera or mobile device
+- WIRC doesn't require any proprietary apps installed on your camera or mobile device
 - You can use any device with a browser to control the camera
-- It is possible to adapt Bimyou for use with camera models from other manufacturers
+- It is possible to adapt WIRC for use with camera models from other manufacturers
 
 ## Bill of Materials
 
@@ -24,23 +24,22 @@ If you think that Bimyou is just a bad case of overengineering, you are right! H
 
 Wire the parts as shown on the diagram below.
 
-<img src="bimyou-bb_bb.png" alt="" width="600"/>
+<img src="wirc-bb_bb.png" alt="" width="600"/>
 
 # Installation and Usage
 
-1. Open the *bimyou.ino* sketch and specify the correct *ssid* and *password* values
-2. Upload the sketch to your ESP8266 NodeMCU board
+1. Upload the sketch to the ESP8266 NodeMCU board
 3. Enable the Remote Control feature on your Sony camera
-3. Point a browser to the device's IP address
-4. Use the buttons to control the camera
+4. Point a browser to the WIRC's IP address and connect the board to the existing Wi-Fi network
+5. Use the buttons to control the camera
 
 ## Problems?
 
-Please report bugs and issues in the [Issues](https://gitlab.com/dmpop/bimyou/issues) section.
+Please report bugs and issues in the [Issues](https://gitlab.com/dmpop/wirc/issues) section.
 
 ## Contribute
 
-If you've found a bug or have a suggestion for improvement, open an issue in the [Issues](https://gitlab.com/dmpop/bimyou/issues) section.
+If you've found a bug or have a suggestion for improvement, open an issue in the [Issues](https://gitlab.com/dmpop/wirc/issues) section.
 
 To add a new feature or fix issues yourself, follow the following steps.
 
