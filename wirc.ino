@@ -11,7 +11,7 @@
 #include <ESP8266WebServer.h>
 
 int IR_LED = 13;     // IR Output Signal to anode of the IR LED
-                    // Cathode of IR LED to ground through a 150 Ohm Resistor.
+// Cathode of IR LED to ground through a 150 Ohm Resistor.
 int i = 0;          // Set the counter to 0
 
 int shutter[] = {1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1};
@@ -239,7 +239,7 @@ void loop()
   // Prepare the response
   String s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n ";
   s += "<head>";
-  s += "<title>Bimyou</title>";
+  s += "<title>WIRC</title>";
   s += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">";
   s += "<style>";
   s += "#content { margin: 0px auto; text-align: center; }";
@@ -252,7 +252,7 @@ void loop()
   s += "</style>";
   s += "</head>";
   s += "<div id='content'>";
-  s += "<h1>WI-FI IR REMOTE CONTROL</h1>";
+  s += "<h1>WIRC</h1>";
   s += "<input id='btn' class='red' type=submit value=\"SHUTTER\" onclick=location.href='/gpio/shutter'>";
   s += "<input id='btn' class='orange' type=submit value=\"2S TIMER\" onclick=location.href='/gpio/2sec'>";
   s += "<input id='btn' type=submit value=\"START/STOP\" onclick=location.href='/gpio/start'>";
